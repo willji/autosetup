@@ -1,0 +1,62 @@
+{% extends "webui/layout.html" %}
+{% load pagination_tags %}
+{% autopaginate vmrelocate_list %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p>{{ introduction }}</p>
+
+<div class="row">
+    <nav>
+        <div class="col-sm-3 col-md-3 pull-right">
+            <form action="{% url 'vmrelocate' %}" method="get" class="navbar-from" role="search">
+                <div class="input-group">
+                    {{ form.keyword }}
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<nav class="pull-right">
+    {% paginate %}
+</nav>
+
+<p></p>
+
+<div class="row">
+    <table class="table">
+        <thread>
+            <tr>
+                <th width="20%">任务创建时间</th>
+                <th width="15%">创建者</th>
+                <th width="15%">名称</th>
+                <th width="15%">Host</th>
+                <th width="15%">网络标签</th>
+                <th width="20%">备注</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for vmrelocateitem in vmrelocate_list %}
+                <tr>
+                    <td>{{ vmrelocateitem.created_date }}</td>
+                    <td>{{ vmrelocateitem.created_by }}</td>
+                    <td>{{ vmrelocateitem.name }}</td>
+                    <td>{{ vmrelocateitem.host }}</td>
+                    <td>{{ vmrelocateitem.vlan_tag }}</td>
+                    <td>
+                        <div style="word-break:break-all;">
+                            {{ vmrelocateitem.comment }}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - 洋码头自动装机系统</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'webui/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'webui/css/site.css' %}" />
+    <script src="{% static 'webui/scripts/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'webui/scripts/modernizr-2.6.2.js' %}"></script>   
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">洋码头自动装机系统</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'vmclone' %}">克隆任务</a></li>
+                    <li><a href="{% url 'vmrelocate' %}">迁移任务</a></li>
+                    <li><a href="{% url 'vmdelete' %}">删除任务</a></li>
+                    <li><a href="{% url 'about' %}">关于</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+    {% block content %}{% endblock %}
+        <div class="container">
+            <footer class="modal-footer">
+                <p class="text-center">&copy; {{ year }} - 洋码头自动装机系统</p>
+            </footer>            
+        </div>
+    </div>
+    
+    <script src="{% static 'webui/scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'webui/scripts/respond.js' %}"></script>
+    {% block scripts %}
+        
+    {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% extends "webui/layout.html" %}
+{% load pagination_tags %}
+{% autopaginate vmdelete_list %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+<p>{{ introduction }}</p>
+
+<div class="row">
+    <nav>
+        <div class="col-sm-3 col-md-3 pull-right">
+            <form action="{% url 'vmdelete' %}" method="get" class="navbar-from" role="search">
+                <div class="input-group">
+                    {{ form.keyword }}
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<nav class="pull-right">
+    {% paginate %}
+</nav>
+
+<p></p>
+
+<div class="row">
+    <table class="table">
+        <thread>
+            <tr>
+                <th width="25%">任务创建时间</th>
+                <th width="25%">创建者</th>
+                <th width="25%">名称</th>
+                <th width="25%">备注</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for vmdeleteitem in vmdelete_list %}
+                <tr>
+                    <td>{{ vmdeleteitem.created_date }}</td>
+                    <td>{{ vmdeleteitem.created_by }}</td>
+                    <td>{{ vmdeleteitem.name }}</td>
+                    <td>
+                        <div style="word-break:break-all;">
+                            {{ vmdeleteitem.comment }}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+
+{% endblock %}
